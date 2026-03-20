@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+    .results { margin-bottom: 2rem; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; }
+    .result-item { margin: 0.5rem 0; }
+    #sim-container { width: 100%; height: 600px; border: 1px solid #333; border-radius: 8px; }
+  </style>
+  <!-- 引入Three.js（全局版，兼容前端） -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <h1><%= title %></h1>
+  
+  <!-- 计算结果展示 -->
+  <div class="results">
+    <h2>Calculation Results 计算结果</h2>
+    <div class="result-item"><strong>Fluid Height 流体高度：</strong> <%= height %> m</div>
+    <div class="result-item"><strong>Fluid Density 流体密度：</strong> <%= density %> kg/m³</div>
+    <div class="result-item"><strong>Gravitational Acceleration 重力加速度：</strong> <%= gravity %> m/s²</div>
+    <div class="result-item"><strong>Outlet Area 出口截面积：</strong> <%= area %> m²</div>
+    <div class="result-item"><strong>Velocity 流速：</strong> <%= velocity %> m/s</div>
+    <div class="result-item"><strong>Flow Rate 流量：</strong> <%= flowRate %> m³/s</div>
+    <div class="result-item"><strong>Pressure 压力：</strong> <%= pressure %> Pa</div>
+  </div>
+  
+  <!-- Three.js流体可视化容器 -->
+  <h2>Fluid Flow Visualization 流体流动可视化</h2>
+  <div id="sim-container"></div>
+  
+  <!-- 把后端参数传递给前端JS（关键：用JSON.stringify） -->
+  <script>
+    // 全局变量：传递计算结果和数据点
+    window.simulationData = {
+      height: <%= height %>,
+      density: <%= density %>,
+      gravity: <%= gravity %>,
+      area: <%= area %>,
+      velocity: <%= velocity %>,
+      flowRate: <%= flowRate %>,
+      pressure: <%= pressure %>,
+      dataPoints: <%- JSON.stringify(dataPoints) %>
+    };
+  </script>
+  
+  <!-- 引入Three.js可视化核心代码 -->
+  <script src="/js/simulator.js" defer></script>
+</body>
+</html>

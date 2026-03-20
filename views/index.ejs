@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <style>
+    /* 简单样式，让表单更美观 */
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+    .form-group { margin: 1rem 0; }
+    label { display: block; margin-bottom: 0.5rem; }
+    input { width: 100%; padding: 0.5rem; font-size: 1rem; }
+    button { padding: 0.8rem 2rem; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+  <h1><%= title %></h1>
+  <p><%= message %></p>
+  
+  <!-- 参数输入表单，提交到/calculate路由 -->
+  <form method="POST" action="/calculate">
+    <div class="form-group">
+      <label for="height">Fluid Height (m) 流体高度：</label>
+      <input type="number" id="height" name="height" value="10" step="0.1" required>
+    </div>
+    <div class="form-group">
+      <label for="density">Fluid Density (kg/m³) 流体密度：</label>
+      <input type="number" id="density" name="density" value="1000" step="10" required>
+    </div>
+    <div class="form-group">
+      <label for="gravity">Gravitational Acceleration (m/s²) 重力加速度：</label>
+      <input type="number" id="gravity" name="gravity" value="9.81" step="0.01" required>
+    </div>
+    <div class="form-group">
+      <label for="area">Outlet Area (m²) 出口截面积：</label>
+      <input type="number" id="area" name="area" value="0.01" step="0.001" required>
+    </div>
+    <button type="submit">Calculate & Visualize 计算并可视化</button>
+  </form>
+</body>
+</html>
